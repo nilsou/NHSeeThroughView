@@ -1,36 +1,23 @@
-#
-# Be sure to run `pod spec lint NAME.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# To learn more about the attributes see http://docs.cocoapods.org/specification.html
-#
 Pod::Spec.new do |s|
   s.name         = "NHSeeThroughView"
   s.version      = "0.1.0"
-  s.summary      = "A short description of NHSeeThroughView."
+  s.summary      = "A set of classes to make see-through views on iOS."
   s.description  = <<-DESC
-                    An optional longer description of NHSeeThroughView
-
-                    * Markdown format.
-                    * Don't worry about the indent, we strip it!
+                     NHSeeThroughView is a set of classes to make see-through views on iOS.
+                     (views that let see content behind them with a shape carved out).
+                     A generic category on UIVIew is provided to achieve this effect on any view.
+                     A UIButton subclass is also provided as an easy way to get the same look directly form Interface Builder.
                    DESC
-  s.homepage     = "http://EXAMPLE/NAME"
-  s.screenshots  = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage     = "http://github.com/nilsou/NHSeeThroughView"
   s.license      = 'MIT'
   s.author       = { "Nils Hayat" => "nilsou@gmail.com" }
-  s.source       = { :git => "http://EXAMPLE/NAME.git", :tag => s.version.to_s }
+  s.source       = { :git => "http://github.com/nilsou/NHSeeThroughView.git", :tag => s.version.to_s }
 
-  # s.platform     = :ios, '5.0'
-  # s.ios.deployment_target = '5.0'
-  # s.osx.deployment_target = '10.7'
+  # s.platform     = :ios, '7.0'
+  # s.ios.deployment_target = '7.0'
   s.requires_arc = true
 
   s.source_files = 'Classes'
-  s.resources = 'Assets'
 
-  s.ios.exclude_files = 'Classes/osx'
-  s.osx.exclude_files = 'Classes/ios'
   # s.public_header_files = 'Classes/**/*.h'
-  # s.frameworks = 'SomeFramework', 'AnotherFramework'
-  # s.dependency 'JSONKit', '~> 1.4'
 end
