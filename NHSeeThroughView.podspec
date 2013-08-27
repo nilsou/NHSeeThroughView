@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "NHSeeThroughView"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "A set of classes to make see-through views on iOS."
   s.description  = <<-DESC
                      NHSeeThroughView is a set of classes to make see-through views on iOS.
