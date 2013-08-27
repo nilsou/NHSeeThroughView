@@ -18,7 +18,7 @@
 }
 
 -(void)setMaskImage:(UIImage *)maskImage atCenter:(CGPoint)center {
-	CGPoint position = CGPointMake(center.x - (int)maskImage.size.width/2.0, center.y - (int)maskImage.size.height/2.0);
+	CGPoint position = CGPointMake((int)(center.x - maskImage.size.width/2.0), (int)(center.y - maskImage.size.height/2.0));
 	[self setMaskImage:maskImage atPosition:position];
 }
 
