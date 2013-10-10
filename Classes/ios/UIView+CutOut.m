@@ -106,6 +106,7 @@ static inline CGSize CGSizeIntegral(CGSize size) {
 	CIImage *outputImage = [filter outputImage];
 	CGImageRef outputCGImage = [context createCGImage:outputImage fromRect:[outputImage extent]];
 	UIImage *maskImage = [UIImage imageWithCGImage:outputCGImage scale:textImage.scale orientation:UIImageOrientationUp];
+    CGImageRelease(outputCGImage);
 	
 	return maskImage;
 }
