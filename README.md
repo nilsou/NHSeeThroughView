@@ -3,11 +3,7 @@
 [![Version](http://cocoapod-badges.herokuapp.com/v/NHSeeThroughView/badge.png)](http://cocoadocs.org/docsets/NHSeeThroughView)
 [![Platform](http://cocoapod-badges.herokuapp.com/p/NHSeeThroughView/badge.png)](http://cocoadocs.org/docsets/NHSeeThroughView)
 
-## Usage
-
-To run the example project; clone the repo, and run `pod install` from the Project directory first.
-
-## Requirements
+NSSeeThroughView is a category on UIView and a UIButton subclass that let you carve out pieces of a UIView / UIButton to let the view behind it appear through it.
 
 ## Installation
 
