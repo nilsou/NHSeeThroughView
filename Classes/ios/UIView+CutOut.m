@@ -73,15 +73,15 @@
 	[maskingLayer addSublayer:imageLayer];
 	
 	self.layer.mask = maskingLayer;
-    // Do any additional setup after loading the view from its nib.
 }
 
 #pragma mark - Text Mask
 
 -(void)setMaskWithText:(NSString *)text font:(UIFont *)font
 {
+    CGPoint center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds) + 1.0);
 	UIImage *maskImage = [self maskImageWithText:text font:font];
-	[self setMaskImage:maskImage];
+	[self setMaskImage:maskImage atCenter:center];
 }
 
 
@@ -106,7 +106,6 @@ static inline CGSize CGSizeIntegral(CGSize size) {
 	CIImage *outputImage = [filter outputImage];
 	CGImageRef outputCGImage = [context createCGImage:outputImage fromRect:[outputImage extent]];
 	UIImage *maskImage = [UIImage imageWithCGImage:outputCGImage scale:textImage.scale orientation:UIImageOrientationUp];
-    CGImageRelease(outputCGImage);
 	
 	return maskImage;
 }
@@ -114,12 +113,12 @@ static inline CGSize CGSizeIntegral(CGSize size) {
 #pragma mark - Composite Mask
 
 -(void)setMaskWithImage:(UIImage *)image text:(NSString *)text font:(UIFont *)font spacing:(CGFloat)spacing {
-	UIImage *maskImage = [self compositeMaskWithText:text font:font image:image spacing:spacing];
+	UIImage *maskImage = [self compositeMaskWithText:text font:font image:image spacing:spacing textVerticalOffset:1.0];
 	[self setMaskImage:maskImage];
 }
 
--(UIImage *)compositeMaskWithText:(NSString *)text font:(UIFont *)font image:(UIImage *)image spacing:(CGFloat)spacing {
-	UIImage *textMask = [self maskImageWithText:text font:font];
+-(UIImage *)compositeMaskWithText:(NSString *)text font:(UIFont *)font image:(UIImage *)image spacing:(CGFloat)spacing textVerticalOffset:(CGFloat)textVerticalOffset{
+    UIImage *textMask = [self maskImageWithText:text font:font];
 	
 	CGSize maskSize = CGSizeIntegral(CGSizeMake(textMask.size.width + spacing + image.size.width, MAX(textMask.size.height, image.size.height)));
 	
@@ -129,9 +128,9 @@ static inline CGSize CGSizeIntegral(CGSize size) {
 	CGRect firstFillRect, secondFillRect;
 	if (image.size.height > textMask.size.height) {
 		imageOrigin = CGPointZero;
-		textMaskOrigin = CGPointMake(image.size.width + spacing, ceilf((image.size.height - textMask.size.height) / 2.0));
-		firstFillRect = CGRectIntegral(CGRectMake(image.size.width + spacing, 0.0, textMask.size.width, ceilf((image.size.height - textMask.size.height) / 2.0)));
-		secondFillRect = CGRectMake(image.size.width + spacing, textMask.size.height + ceilf((image.size.height - textMask.size.height) / 2.0), textMask.size.width, ceilf((image.size.height - textMask.size.height) / 2.0));
+		textMaskOrigin = CGPointMake(image.size.width + spacing, ceilf((image.size.height - textMask.size.height) / 2.0) + textVerticalOffset);
+		firstFillRect = CGRectIntegral(CGRectMake(image.size.width + spacing, 0.0, textMask.size.width, ceilf((image.size.height - textMask.size.height) / 2.0) + textVerticalOffset));
+		secondFillRect = CGRectMake(image.size.width + spacing, textMask.size.height + ceilf((image.size.height - textMask.size.height) / 2.0) + textVerticalOffset, textMask.size.width, ceilf((image.size.height - textMask.size.height) / 2.0) - textVerticalOffset);
 	} else {
 		imageOrigin = CGPointMake(0.0, ceilf((textMask.size.height - image.size.height) / 2.0));
 		textMaskOrigin	= CGPointMake(image.size.width + spacing, 0.0);
